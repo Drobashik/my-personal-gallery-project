@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    color: black;
+}
+
+h1, h2 {
+    color: white;
+}
+
+
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 45px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    transition: 200ms;
+    &:hover {
+        background-color: rgb(88, 88, 88);
+        color: white;
+        border: 1px solid white;
+        transition: 100ms;
+    }
+    &:active {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+    }
+}
+
+.active {
+    border-bottom: 1px solid #fff;
+}
+
+.active-btn {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
