@@ -1,21 +1,25 @@
-<header>
-  <nav class="container content-center">
-    <div class="logo">
-      <h1>Personal Gallery</h1>
-    </div>
-    <ul class="content-center">
-      <div class="menu content-center">
-        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-        <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
-        <li><a routerLink="/contact" routerLinkActive="active">Contact Us</a></li>
-      </div>
-      <div class="sign-section content-center">
-        <li><a class="btn" routerLink="/log-in" routerLinkActive="active-btn">Log In</a></li>
-        <li><a class="btn" routerLink="/sign-up" routerLinkActive="active-btn">Sign Up</a></li>
-      </div>
-    </ul>
-  </nav>
-</header>
-<section>
-  <router-outlet></router-outlet>
-</section>
+<div class="background">
+  <div class="black-bg">
+    <header>
+      <nav class="container content-center">
+        <div class="logo">
+          <h1>Personal Gallery</h1>
+        </div>
+        <ul class="content-center">
+          <div class="menu content-center">
+            <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+            <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact Us</a></li>
+          </div>
+          <div class="sign-section content-center">
+            <li><a class="btn" routerLink="/log-in" routerLinkActive="active-btn">Log In</a></li>
+            <li><a class="btn" routerLink="/sign-up" routerLinkActive="active-btn">Sign Up</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

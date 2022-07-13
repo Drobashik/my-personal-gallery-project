@@ -1,15 +1,16 @@
 .container {
-    height: 700px;
+    height: 100vh;
 }
 .box {
     flex-direction: column;
     justify-content: flex-start;
-    width: 1000px;
+    background-color: rgba(255, 255, 255, 0.795);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.562);
+    border-radius: 20px;
+    width: 700px;
     height: 500px;
-    background-color: black;
-    border-radius: 10px;
     h1 {
-        font-size: 50px;
+        color: black;
         margin: 50px 0 50px;
     }
     .input-block {
