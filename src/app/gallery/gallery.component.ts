@@ -29,7 +29,6 @@ export class GalleryComponent implements OnInit {
 
   closeImage() {
     this.openedImage = false;
-    this.imageShowed = {url: ''};
   }
 
   nextImage() {
@@ -43,5 +42,4 @@ export class GalleryComponent implements OnInit {
       this.indexOfImageArray = this.imagesArray.length;
     this.imageShowed = this.imagesArray[--this.indexOfImageArray]
   }
-
 }
