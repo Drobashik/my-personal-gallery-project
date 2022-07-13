@@ -12,10 +12,10 @@ export class GalleryComponent implements OnInit {
   constructor(private imageService: ImageService) { }
 
   imagesArray: IImage[] = []
+  imageShowed: IImage;
 
   indexOfImageArray: number = 0;
   openedImage: boolean = false;
-  imageShowed: IImage;
 
   ngOnInit(): void {
     this.imagesArray = this.imageService.images;
