@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ContactComponent } from './contact/contact.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/signup.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +14,11 @@ import { SignUpComponent } from './sign-up/signup.component';
     HomeComponent,
     GalleryComponent,
     ContactComponent,
-    LoginComponent,
-    SignUpComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

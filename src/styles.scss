@@ -33,10 +33,12 @@ h1, h2 {
 a {
     text-decoration: none;
     color: white;
+    font-size: 17px;
 }
 
 li {
     list-style: none;
+    font-size: 17px;
 }
 
 .btn {
@@ -50,6 +52,7 @@ li {
     color: white;
     padding: 5px 10px;
     transition: 200ms;
+    cursor: pointer;
     &:hover {
         background-color: rgb(88, 88, 88);
         color: white;
