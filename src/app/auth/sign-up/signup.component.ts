@@ -25,21 +25,32 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  onSubmitSignUpForm(): void {
+  onSubmitSignUpForm() {
     this.areValidPasswords = this.userAuthService.checkPasswordsValidation(this.signUpFormGroup)
     if (this.signUpFormGroup.valid && this.areValidPasswords) {
-      console.log(this.signUpFormGroup.value);
-      const user: User = {
-        name: this.signUpFormGroup.value.name,
-        email: this.signUpFormGroup.value.email,
-        password: this.signUpFormGroup.value.password,
-      }
-      this.userAuthService.createUser(user).subscribe((data) => {
-        this.router.navigate(['/log-in'])
+      const {name, email, password} = this.signUpFormGroup.value;
+      this.userAuthService.signUp(name, email, password).subscribe(() => {
+        this.router.navigate(['/user-page'])
       })
-      return;
     }
-    this.signUpFormGroup.invalid
   }
+
+
+  // onSubmitSignUpForm(): void {
+  //   this.areValidPasswords = this.userAuthService.checkPasswordsValidation(this.signUpFormGroup)
+  //   if (this.signUpFormGroup.valid && this.areValidPasswords) {
+  //     console.log(this.signUpFormGroup.value);
+  //     const user: User = {
+  //       name: this.signUpFormGroup.value.name,
+  //       email: this.signUpFormGroup.value.email,
+  //       password: this.signUpFormGroup.value.password,
+  //     }
+  //     // this.userAuthService.createUser(user).subscribe((data) => {
+  //     //   this.router.navigate(['/log-in'])
+  //     // })
+  //     return;
+  //   }
+  //   this.signUpFormGroup.invalid
+  // }
 
 }

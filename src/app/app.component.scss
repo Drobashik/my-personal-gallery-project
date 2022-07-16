@@ -32,8 +32,9 @@ header {
 
         .user-section {
             li {
+                margin-left: 20px;
                 &:first-child {
-                    margin-right: 20px;
+                    margin-left: 0;
                 }
             }
         }

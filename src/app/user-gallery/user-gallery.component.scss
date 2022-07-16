@@ -1,0 +1,16 @@
+.input-box {
+    height: 100vh;
+    label {
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.123);
+        width: 400px;
+        height: 200px;
+        border: 4px  dashed #ccc;
+        border-radius: 10px;
+        font-size: 30px;
+        text-align: center;
+    }
+    input {
+        display: none;
+    }
+}

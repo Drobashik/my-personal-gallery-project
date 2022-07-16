@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { UserAuthService } from 'src/app/services/user-auth.service';
 export class LoginComponent implements OnInit {
 
   logInFormGroup: FormGroup;
+  invalidForm: boolean = false;
 
-  constructor(private  authService: UserAuthService) { }
+  constructor(private  authService: UserAuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.logInFormGroup = new FormGroup({
@@ -22,14 +24,19 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit() {
-    if(this.logInFormGroup.valid) {
-      this.authService.getUsers(this.logInFormGroup.value.password).subscribe(data => {
-        console.log(data);
+    if (this.logInFormGroup.valid) {
+      const {email, password} = this.logInFormGroup.value;
+      this.authService.login(email, password).subscribe({
+        next: (data) => {
+          this.invalidForm = false
+          this.router.navigate(['/user-page'])
+          console.log(data);
+        },
+        error: (error) => {
+          console.error(error);
+          this.invalidForm = true;
+        }
       })
-      console.log(this.logInFormGroup.value);
-      return;
     }
-    console.error('Invalid form')
   }
-
 }

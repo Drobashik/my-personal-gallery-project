@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Image } from '../models/image.model';
 import { ImageService } from '../services/image.service';
 
@@ -7,7 +7,7 @@ import { ImageService } from '../services/image.service';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(private imageService: ImageService) { }
 
@@ -18,7 +18,10 @@ export class GalleryComponent implements OnInit {
   openedImage: boolean = false;
 
   ngOnInit(): void {
-    this.imagesArray = this.imageService.images;
+    this.imagesArray = [];
+    this.imageService.getImages().subscribe(imageUrl => {
+      imageUrl.forEach(element => this.imagesArray.push(element))
+    })
   }
 
   openImage(index: number) {
@@ -42,4 +45,9 @@ export class GalleryComponent implements OnInit {
       this.indexOfImageArray = this.imagesArray.length;
     this.imageShowed = this.imagesArray[--this.indexOfImageArray]
   }
+
+  ngOnDestroy(): void {
+    this.imagesArray = []
+  }
+
 }
