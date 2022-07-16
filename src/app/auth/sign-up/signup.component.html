@@ -1,10 +1,25 @@
 <div class="sign-up-block content-center">
-    <form>
+    <form [formGroup]="signUpFormGroup" (ngSubmit)="onSubmitSignUpForm()">
         <h1>Sign Up</h1>
-        <input placeholder="Your name" type="text" >
-        <input placeholder="Your email" type="email">
-        <input placeholder="Password" type="password">
-        <input placeholder="Repeat password" type="password">
+        <input 
+        [ngClass]="{'error': signUpFormGroup.get('name')?.invalid && signUpFormGroup.get('name')?.dirty}" 
+        placeholder="Your name" type="text" 
+        formControlName="name"
+        >
+        <input 
+        [ngClass]="{'error': signUpFormGroup.get('email')?.invalid && signUpFormGroup.get('email')?.dirty}" 
+        placeholder="Your email" type="email" 
+        formControlName="email"
+        >
+        <input 
+        [ngClass]="{'error': signUpFormGroup.get('password')?.invalid && signUpFormGroup.get('password')?.dirty || !areValidPasswords}" placeholder="Password" type="password" 
+        formControlName="password"
+        >
+        <input 
+        [ngClass]="{'error': signUpFormGroup.get('repeatedPassword')?.invalid && signUpFormGroup.get('repeatedPassword')?.dirty || !areValidPasswords}" 
+        placeholder="Repeat password" type="password" 
+        formControlName="repeatedPassword"
+        >
         <button class="btn">Sign Up</button>
     </form>
 </div>
