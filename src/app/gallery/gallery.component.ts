@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IImage } from '../shared/image';
-import { ImageService } from '../shared/image.service';
+import { Image } from '../models/image.model';
+import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-gallery',
@@ -11,8 +11,8 @@ export class GalleryComponent implements OnInit {
 
   constructor(private imageService: ImageService) { }
 
-  imagesArray: IImage[] = []
-  imageShowed: IImage;
+  imagesArray: Image[] = []
+  imageShowed: Image;
 
   indexOfImageArray: number = 0;
   openedImage: boolean = false;

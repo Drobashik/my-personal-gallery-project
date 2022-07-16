@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { IImage } from "./image";
+import { Image } from "../models/image.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ImageService {
-    images: IImage[] = [
+    images: Image[] = [
         {url: './assets/imgtest/1.jpg'},
         {url: './assets/imgtest/2.jpg'},
         {url: './assets/imgtest/3.jpg'},
