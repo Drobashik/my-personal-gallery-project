@@ -14,6 +14,7 @@ export class AppComponent {
 
   logOut() {
     this.userAuthService.logout().subscribe(() => {
+      this.userAuthService.isLoggedIn = false
       this.router.navigate(['log-in'])
     })
   }

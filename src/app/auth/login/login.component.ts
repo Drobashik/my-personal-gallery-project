@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(email, password).subscribe({
         next: (data) => {
           this.invalidForm = false
+          this.authService.isLoggedIn = true;
           this.router.navigate(['/user-page'])
           console.log(data);
         },
