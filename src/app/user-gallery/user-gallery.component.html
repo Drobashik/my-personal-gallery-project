@@ -2,3 +2,6 @@
     <label for="file" class="content-center">{{fileName}}</label>
     <input id="file" type="file" (change)="uploadFile($event)">
 </div>
+<div class="load-box content-center" *ngIf="loadingHandler.isLoading$ | async">
+    <i class="uil uil-spinner-alt"></i>
+</div>

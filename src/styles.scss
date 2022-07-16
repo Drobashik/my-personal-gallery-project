@@ -128,3 +128,19 @@ form {
     width: 700px;
     padding: 80px 180px;
 }
+
+.load-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    font-size: 100px;
+    animation: spin 1s infinite linear;
+    transform: rotate(0);
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

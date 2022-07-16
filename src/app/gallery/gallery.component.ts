@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Image } from '../models/image.model';
 import { ImageService } from '../services/image.service';
+import { LoadingHandler } from '../services/loading-handler';
 
 @Component({
   selector: 'app-gallery',
@@ -14,13 +15,17 @@ export class GalleryComponent implements OnInit, OnDestroy {
   imagesArray: Image[] = []
   imageShowed: Image;
 
+  loadingHandler = new LoadingHandler();
+
   indexOfImageArray: number = 0;
   openedImage: boolean = false;
 
   ngOnInit(): void {
+    this.loadingHandler.beginLoading()
     this.imagesArray = [];
     this.imageService.getImages().subscribe(imageUrl => {
       imageUrl.forEach(element => this.imagesArray.push(element))
+      this.loadingHandler.endLoading()
     })
   }
 

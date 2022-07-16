@@ -7,4 +7,7 @@
         <img [src]="imageShowed.url" alt="" (click)="closeImage()">
         <span (click)="nextImage()">&rarr;</span>
     </div>
+    <div class="load-box content-center" *ngIf="loadingHandler.isLoading$ | async">
+        <i class="uil uil-spinner-alt"></i>
+    </div>
 </div>
