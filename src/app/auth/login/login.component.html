@@ -1,8 +1,8 @@
 <div class="log-in-block content-center">
-    <form>
+    <form [formGroup]="logInFormGroup" (ngSubmit)="onSubmit()">
         <h1>Log In</h1>
-        <input placeholder="Your email" type="email">
-        <input placeholder="Password" type="password">
+        <input placeholder="Your email" type="email" formControlName="email">
+        <input placeholder="Password" type="password" formControlName="password">
         <button class="btn">Log In</button>
     </form>
 </div>
