@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageService } from '../services/image.service';
-import { LoadingHandler } from '../services/loading-handler';
+import { ImageService } from '../../services/image.service';
+import { LoadingHandler } from '../../services/loading-handler';
 
 @Component({
   selector: 'app-user-gallery',

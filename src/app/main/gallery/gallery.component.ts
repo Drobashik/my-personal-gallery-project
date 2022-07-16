@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Image } from '../models/image.model';
-import { ImageService } from '../services/image.service';
-import { LoadingHandler } from '../services/loading-handler';
+import { Image } from '../../models/image.model';
+import { ImageService } from '../../services/image.service';
+import { LoadingHandler } from '../../services/loading-handler';
 
 @Component({
   selector: 'app-gallery',
