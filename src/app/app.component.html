@@ -11,9 +11,13 @@
             <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
             <li><a routerLink="/contact" routerLinkActive="active">Contact Us</a></li>
           </div>
-          <div class="sign-section content-center">
+          <div class="sign-section content-center" *ngIf="true">
             <li><a class="btn" routerLink="/log-in" routerLinkActive="active-btn">Log In</a></li>
             <li><a class="btn" routerLink="/sign-up" routerLinkActive="active-btn">Sign Up</a></li>
+          </div>
+          <div class="user-section content-center" *ngIf="false">
+            <li class="btn">My Gallery</li>
+            <li class="btn">My Account</li>
           </div>
         </ul>
       </nav>
