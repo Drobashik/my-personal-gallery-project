@@ -1,8 +1,8 @@
 <div class="gallery container">
     <div class="img-box" *ngFor="let image of imagesArray; let i = index">
         <img [src]="image.url" alt=""  (click)="openImage(i)">
-        <div class="hover-rect content-center" *ngIf="(userAuthService.currentUser$ | async) !== null || (smallLoadingHandler.isLoading$ | async) !== true" (click)="deleteImage(image.id, i)">Delete</div>
-        <div class="loading-delete content-center" *ngIf="(smallLoadingHandler.isLoading$ | async) === true && i ===  chosenIndex">
+        <div class="hover-rect content-center" *ngIf="(userAuthService.currentUser$ | async) !== null" (click)="deleteImage(image.id, i)"><span *ngIf="(smallLoadingHandler.isLoading$ | async) !== true">Delete</span></div>
+        <div class="loading-delete content-center" *ngIf="(smallLoadingHandler.isLoading$ | async) === true && i === chosenIndex">
             <i class="uil uil-spinner-alt"></i>
         </div>
     </div>
