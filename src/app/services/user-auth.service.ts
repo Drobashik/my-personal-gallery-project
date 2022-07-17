@@ -15,7 +15,6 @@ export class UserAuthService {
 
     usersURL: string = 'https://gallery-23284-default-rtdb.firebaseio.com/users'
     currentUser$ = authState(this.auth)
-    isLoggedIn: boolean = false;
 
     constructor( private auth: Auth ) {}
 

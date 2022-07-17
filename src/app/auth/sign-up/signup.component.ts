@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { LoadingHandler } from 'src/app/services/loading-handler';
 import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
@@ -13,12 +13,13 @@ export class SignUpComponent implements OnInit {
 
   signUpFormGroup: FormGroup;
   areValidPasswords: boolean = true;
+  loadingHandler = new LoadingHandler();
 
   constructor(private userAuthService: UserAuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.signUpFormGroup = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       email: new FormControl(null, [Validators.required,  Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       repeatedPassword: new FormControl(null, [Validators.required, Validators.minLength(5)]),
@@ -26,10 +27,12 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmitSignUpForm() {
+    this.loadingHandler.beginLoading()
     this.areValidPasswords = this.userAuthService.checkPasswordsValidation(this.signUpFormGroup)
     if (this.signUpFormGroup.valid && this.areValidPasswords) {
       const {name, email, password} = this.signUpFormGroup.value;
       this.userAuthService.signUp(name, email, password).subscribe(() => {
+        this.loadingHandler.endLoading()
         this.router.navigate(['/user-page'])
       })
     }
