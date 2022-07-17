@@ -13,6 +13,7 @@ export class UserGalleryComponent implements OnInit {
   loadingHandler = new LoadingHandler();
   fileName: string = 'Upload image'
 
+
   constructor( private imageService: ImageService ) { }
 
   ngOnInit(): void {
@@ -21,12 +22,10 @@ export class UserGalleryComponent implements OnInit {
   uploadFile(event: Event) {
     this.loadingHandler.beginLoading()
     const file = (<HTMLInputElement>event.target).files![0]
-    this.imageService.uploadImage(file, `images/${new Date()}`).subscribe(data => {
+    this.imageService.uploadImage(file, `images/${file.name}`).subscribe(data => {
       this.fileName = file.name;
       this.loadingHandler.endLoading()
-      this.imageService.postImage(data).subscribe(image => {
-        console.log(image);
-      })
+      this.imageService.postImage(data, file.name).subscribe()
     })
   }
 }

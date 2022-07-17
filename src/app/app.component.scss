@@ -33,6 +33,8 @@ header {
         .user-section {
             li {
                 margin-left: 20px;
+                display: flex;
+                align-items: center;
                 &:first-child {
                     margin-left: 0;
                 }

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Image } from "../models/image.model";
 import { Storage, ref, uploadBytes } from "@angular/fire/storage";
 import { from, map, Observable, switchMap } from "rxjs";
-import { getDownloadURL } from "firebase/storage";
+import { deleteObject, getDownloadURL, StorageReference } from "firebase/storage";
 import { DtoImage, DtoImageKey } from "../dto/image-list.dto";
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ImageService {
 
     images: Image[] = [];
 
-    constructor(private http: HttpClient, private storage: Storage) {}
+    constructor(private http: HttpClient, private storage: Storage ) {}
 
     getImages(): Observable<Image[]> {
         return this.http.get<DtoImage>(`${this.urlImages}/images.json`).pipe(
@@ -23,7 +23,8 @@ export class ImageService {
                 return Object.entries(dataURLs).map(([key, values]) => {
                     const image: Image = {
                         id: key,
-                        url: values.url
+                        url: values.url,
+                        name: values.name
                     }
                     return image;
                 })
@@ -42,20 +43,22 @@ export class ImageService {
         )
     }
 
-    postImage(dataUrl: string): Observable<Image> {
-        console.log(dataUrl);
-        return this.http.post<DtoImageKey>(`${this.urlImages}/images.json`, {url: dataUrl}).pipe(
+    postImage(dataUrl: string, nameImage: string): Observable<Image> {
+        return this.http.post<DtoImageKey>(`${this.urlImages}/images.json`, {url: dataUrl,  name: nameImage}).pipe(
             map(response => {
                 const image: Image = {
                     id: response.name,
                     url: dataUrl,
+                    name: nameImage
                 }
                 return image;
             })
         )
     }
 
-    deleteImage(imageId: string) {
+    deleteImage(imageId: string, fileName: string) {
+        const storage = ref(this.storage, `images/${fileName}`)
+        deleteObject(storage)
         return this.http.delete(`${this.urlImages}/images/${imageId}.json`)
     }
 

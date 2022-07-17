@@ -27,7 +27,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadingHandler.beginLoading()
     this.imageService.getImages().subscribe(imageUrl => {
-      console.log(imageUrl);
       imageUrl.forEach(element => this.imagesArray.push(element))
       this.loadingHandler.endLoading()
     })
@@ -54,10 +53,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.imageShowed = this.imagesArray[--this.indexOfImageArray]
   }
 
-  deleteImage(imageId: string, index: number) {
+  deleteImage(imageId: string, index: number, fileName: string) {
     this.chosenIndex = index
     this.smallLoadingHandler.beginLoading()
-    this.imageService.deleteImage(imageId).subscribe(data => {
+    this.imageService.deleteImage(imageId, fileName).subscribe(data => {
       this.imagesArray = this.imagesArray.filter(image => image.id !== imageId)
       this.smallLoadingHandler.endLoading()
     });

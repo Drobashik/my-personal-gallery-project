@@ -1,1 +1,26 @@
-<p>user-page works!</p>
+<div class="user-page-block content-center">
+    <ng-container *ngIf="userAuthService.currentUser$ | async as user">
+        <form>
+            <div class="left">
+                <img src="./assets/img.png" alt="">
+                <hr>
+                <div class="name">
+                    <h2>Name:</h2>
+                    <input type="text" [value]="user.displayName">
+                </div>
+                <div class="name">
+                    <h2>Email:</h2>
+                    <input type="text" [value]="user.email">
+                </div>
+                <div class="statistic">
+                    <h2>Uploaded images: </h2>
+                    <p>{{ 0 }}</p>
+                </div>
+            </div>
+            <div class="right">
+                <h1>Hello, {{user.displayName}}!</h1>
+                <button class="btn">Save profile</button>
+            </div>
+        </form>
+    </ng-container>
+</div>

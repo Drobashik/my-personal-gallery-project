@@ -19,9 +19,9 @@
           </ng-template>
           <ng-container *ngIf="userAuthService.currentUser$ | async as user; else logIn">
             <div class="user-section content-center">
-              <li class="btn" routerLink="/user-gallery" routerLinkActive="active-btn">My Gallery</li>
+              <li class="btn" routerLink="/user-gallery" routerLinkActive="active-btn">Upload</li>
               <li class="btn" routerLink="/user-page" routerLinkActive="active-btn">{{user.displayName}}</li>
-              <li class="btn" (click)="logOut()">Log out</li>
+              <li class="btn" (click)="logOut()"><i class="uil uil-signout"></i> Log out</li>
             </div>
           </ng-container>
         </ul>
