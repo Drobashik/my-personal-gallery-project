@@ -4,6 +4,7 @@ import { Image } from "../models/image.model";
 import { Storage, ref, uploadBytes } from "@angular/fire/storage";
 import { from, map, Observable, switchMap } from "rxjs";
 import { getDownloadURL } from "firebase/storage";
+import { DtoImage, DtoImageKey } from "../dto/image-list.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -16,13 +17,16 @@ export class ImageService {
 
     constructor(private http: HttpClient, private storage: Storage) {}
 
-    getImages() {
-        return this.http.get(`${this.urlImages}/images.json`).pipe(
+    getImages(): Observable<Image[]> {
+        return this.http.get<DtoImage>(`${this.urlImages}/images.json`).pipe(
             map(dataURLs => {
-                return Object.keys(dataURLs)
-                    .map(keys => {
-                        return (dataURLs as any)[keys]
-                    })
+                return Object.entries(dataURLs).map(([key, values]) => {
+                    const image: Image = {
+                        id: key,
+                        url: values.url
+                    }
+                    return image;
+                })
             })
         )
     }
@@ -38,8 +42,21 @@ export class ImageService {
         )
     }
 
-    postImage(dataUrl: string) {
-        return this.http.post(`${this.urlImages}/images.json`, {url: dataUrl})
+    postImage(dataUrl: string): Observable<Image> {
+        console.log(dataUrl);
+        return this.http.post<DtoImageKey>(`${this.urlImages}/images.json`, {url: dataUrl}).pipe(
+            map(response => {
+                const image: Image = {
+                    id: response.name,
+                    url: dataUrl,
+                }
+                return image;
+            })
+        )
+    }
+
+    deleteImage(imageId: string) {
+        return this.http.delete(`${this.urlImages}/images/${imageId}.json`)
     }
 
 }

@@ -1,10 +1,8 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Auth, authState } from "@angular/fire/auth";
 import { FormGroup } from "@angular/forms";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { from, map, Observable, switchMap } from "rxjs";
-import { DtoUserCollection, DtoUserKey } from "../dto/user-list.dto";
 import { User } from "../models/user.model";
 
 @Injectable({

@@ -24,8 +24,8 @@ export class UserGalleryComponent implements OnInit {
     this.imageService.uploadImage(file, `images/${new Date()}`).subscribe(data => {
       this.fileName = file.name;
       this.loadingHandler.endLoading()
-      this.imageService.postImage(data).subscribe(data => {
-        console.log(data);
+      this.imageService.postImage(data).subscribe(image => {
+        console.log(image);
       })
     })
   }

@@ -9,7 +9,6 @@
         width: 500px;
         height: 300px;
         object-fit: cover;
-        margin-bottom: 30px;
         border-radius: 10px;
     }
     .dummy {
@@ -54,7 +53,35 @@
             }
         }
     }
-
+    .img-box {
+        position: relative;
+        max-height: 300px;
+        margin-bottom: 30px;
+        .hover-rect, .loading-delete {
+            i {
+                font-size: 30px;
+                transform: rotate(0);
+                animation: spin 1s infinite linear;
+            }
+            cursor: pointer;
+            display: flex;
+            position: absolute;
+            width: 100%;
+            border-radius: 0 0 10px 10px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.438);
+            color: white;
+            text-align: center;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%,  0);
+            opacity: 0;
+            transition: 300ms;
+        }
+        &:hover .hover-rect, .loading-delete {
+            opacity: 1;
+        }
+    }
  
 
 }
