@@ -3,7 +3,6 @@ import { Auth, authState } from "@angular/fire/auth";
 import { FormGroup } from "@angular/forms";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { from, map, Observable, switchMap } from "rxjs";
-import { User } from "../models/user.model";
 
 @Injectable({
     providedIn: 'root',
