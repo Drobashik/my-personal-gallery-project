@@ -31,13 +31,18 @@ export class SignUpComponent implements OnInit {
     this.areValidPasswords = this.userAuthService.checkPasswordsValidation(this.signUpFormGroup)
     if (this.signUpFormGroup.valid && this.areValidPasswords) {
       const {name, email, password} = this.signUpFormGroup.value;
-      this.userAuthService.signUp(name, email, password).subscribe(() => {
-        this.loadingHandler.endLoading()
-        this.router.navigate(['/user-page'])
+      this.userAuthService.signUp(name, email, password).subscribe({
+        next: () => {
+          this.loadingHandler.endLoading();
+          this.router.navigate(['/user-page']);
+        },
+        error: () => {
+          this.loadingHandler.endLoading();
+        }
       })
     }
   }
-
+  
 
   // onSubmitSignUpForm(): void {
   //   this.areValidPasswords = this.userAuthService.checkPasswordsValidation(this.signUpFormGroup)
