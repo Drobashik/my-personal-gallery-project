@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 import { ImageService } from '../../services/image.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { LoadingHandler } from '../../services/loading-handler';
 
 @Component({
@@ -11,21 +13,53 @@ import { LoadingHandler } from '../../services/loading-handler';
 export class UserGalleryComponent implements OnInit {
 
   loadingHandler = new LoadingHandler();
-  fileName: string = 'Upload image'
 
+  file: File | null;
 
-  constructor( private imageService: ImageService ) { }
+  previewFile: SafeUrl;
+  
+  isShowingPreview: boolean = false;
+
+  constructor( private imageService: ImageService,
+    private domSanitizer: DomSanitizer ) { }
 
   ngOnInit(): void {
   }
 
-  uploadFile(event: Event) {
-    this.loadingHandler.beginLoading()
-    const file = (<HTMLInputElement>event.target).files![0]
-    this.imageService.uploadImage(file, `images/${file.name}`).subscribe(data => {
-      this.fileName = file.name;
-      this.loadingHandler.endLoading()
-      this.imageService.postImage(data, file.name).subscribe()
-    })
+  uploadFile() {
+    if (this.file) {
+      const imageId = Date.now()
+      this.loadingHandler.beginLoading()
+      this.imageService.uploadImage(this.file, `images/${imageId}`)
+      .pipe( switchMap((dataUrl) => this.imageService.postImage(dataUrl, imageId)) )
+      .subscribe({
+        next: () => {
+          this.isShowingPreview = false;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          this.file = null;
+          this.loadingHandler.endLoading()
+        }
+      })
+    }
+  }
+  
+  chooseFile(file: File) {
+    if (file) {
+      this.file = file
+      this.isShowingPreview = true;
+      const fileUrl = URL.createObjectURL(file);
+      this.previewFile = this.domSanitizer.bypassSecurityTrustUrl(fileUrl)
+      return;
+    }
+    this.isShowingPreview = false;
+  }
+
+  deletePhotoFromPreview() {
+    this.isShowingPreview = false
+    this.file = null;
   }
 }

@@ -32,12 +32,13 @@ export class LoginComponent implements OnInit {
       this.authService.login(email, password).subscribe({
         next: (data) => {
           this.invalidForm = false
-          this.loadingHandler.endLoading()
           this.router.navigate(['/user-page'])
         },
         error: (error) => {
           console.error(error);
           this.invalidForm = true;
+        },
+        complete: () => {
           this.loadingHandler.endLoading()
         }
       })

@@ -9,28 +9,42 @@ import { LoadingHandler } from '../../services/loading-handler';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent implements OnInit, OnDestroy {
-
-  constructor(private imageService: ImageService, public userAuthService: UserAuthService) { }
+export class GalleryComponent implements OnInit {
 
   imagesArray: Image[] = []
   imageShowed: Image;
-
+  
   loadingHandler = new LoadingHandler();
   smallLoadingHandler = new LoadingHandler();
-
-  chosenIndex: number
-
+  
+  chosenIndex: number;
   indexOfImageArray: number = 0;
+
   openedImage: boolean = false;
+  isEmptyArray: boolean = false;
+
+
+  constructor(private imageService: ImageService, public userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
+    this.isEmptyArray = false;
+
     this.loadingHandler.beginLoading()
-    this.imageService.getImages().subscribe(imageUrl => {
-      imageUrl.forEach(element => this.imagesArray.push(element))
-      this.loadingHandler.endLoading()
+
+    this.imageService.getImages().subscribe({
+      next: (images) => {
+        images.forEach(element => this.imagesArray.push(element))
+      },
+      error: (error) => {
+        this.isEmptyArray = true
+        this.loadingHandler.endLoading()
+      },
+      complete: () => {
+        this.loadingHandler.endLoading()
+      }
     })
   }
+
   openImage(index: number) {
     this.openedImage = true;
     this.indexOfImageArray = index
@@ -53,17 +67,23 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.imageShowed = this.imagesArray[--this.indexOfImageArray]
   }
 
-  deleteImage(imageId: string, index: number, fileName: string) {
+  deleteImage(imageId: string, index: number, fileName: number) {
     this.chosenIndex = index
     this.smallLoadingHandler.beginLoading()
-    this.imageService.deleteImage(imageId, fileName).subscribe(data => {
-      this.imagesArray = this.imagesArray.filter(image => image.id !== imageId)
-      this.smallLoadingHandler.endLoading()
+    this.imageService.deleteImage(imageId, fileName).subscribe({
+      next: () => {
+        this.imagesArray = this.imagesArray.filter(image => image.id !== imageId)
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        if (!this.imagesArray.length) {
+          this.isEmptyArray = !this.isEmptyArray;
+        }
+        this.smallLoadingHandler.endLoading()
+      },
     });
   }
-
-  ngOnDestroy(): void {
-    this.imagesArray = []
-  }
-
+  
 }

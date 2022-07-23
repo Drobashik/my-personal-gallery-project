@@ -1,7 +1,14 @@
 <div class="input-box content-center">
-    <label for="file" class="content-center">{{fileName}}</label>
-    <input id="file" type="file" (change)="uploadFile($event)">
-</div>
-<div class="load-box content-center" *ngIf="loadingHandler.isLoading$ | async">
-    <i class="uil uil-spinner-alt"></i>
+    <div class="pre-view" *ngIf="isShowingPreview">
+        <img [src]="previewFile" alt="Preview">
+        <div class="modal-delete content-center" (click)="deletePhotoFromPreview()">
+            <span>&times;</span>
+        </div>
+    </div>
+    <label for="file" class="content-center">{{file?.name ?? 'Choose your image'}}</label>
+    <input #fileInput id="file" type="file" (change)="chooseFile(fileInput.files![0])">
+    <button class="btn" (click)="uploadFile()">Upload to gallery</button>
+    <div class="load-box content-center" *ngIf="loadingHandler.isLoading$ | async">
+        <i class="uil uil-spinner-alt"></i>
+    </div>
 </div>

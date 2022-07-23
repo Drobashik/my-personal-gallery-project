@@ -5,23 +5,29 @@ header {
     width: 100%;
     background-color: black;
     height: 100px;
+
     nav {
         height: 100%;
         justify-content: space-between;
+
         .logo {
             cursor: pointer;
         }
+
         .menu {
             li {
                 margin-left: 40px;
                 border-bottom: 1px solid transparent;
                 transition: 200ms;
+
                 &:hover {
                     border-bottom: 1px solid #fff;
                 }
             }
+
             margin-right: 50px;
         }
+
         .sign-section {
             li {
                 &:first-child {
@@ -35,10 +41,37 @@ header {
                 margin-left: 20px;
                 display: flex;
                 align-items: center;
+
                 &:first-child {
                     margin-left: 0;
                 }
             }
         }
+
+        .bars {
+            color: white;
+            font-size: 50px;
+            display: none;
+        }
+    }
+}
+
+
+@media screen and (max-width:680px) {
+    .menu {
+        display: none;
+    }
+    .sign-section {
+        display: none;
+    }
+    .user-section {
+        display: none;
+    }
+    .bars {
+        display: block !important;
+    }
+
+    .container {
+        padding: 0 30px;
     }
 }

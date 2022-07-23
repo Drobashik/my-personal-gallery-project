@@ -36,30 +36,4 @@ export class UserAuthService {
         return true;
       }
 
-    // getUsers(id: string):Observable<User[]> {
-    //     return this.http.get<DtoUserCollection>(`${this.usersURL}/.json`).pipe(
-    //         map(dataUser => {
-    //             return Object.entries(dataUser).map(([key, dtoUser]) => {
-    //                 const user: User = {
-    //                     name: dtoUser.name,
-    //                     email: dtoUser.email,
-    //                     password: dtoUser.password,
-    //                 }
-    //                 return user;
-    //             })
-    //         })
-    //     )
-    // }
-    
-
-    // createUser(user: User): Observable<DtoUserKey> {
-    //     return this.http.post<DtoUserKey>(`${this.usersURL}.json`, user).pipe(
-    //         map(userResponseKey => {
-    //             return userResponseKey;
-    //         })
-    //     )
-    // }
-
-
-
 }

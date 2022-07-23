@@ -1,5 +1,35 @@
 .input-box {
     height: 100vh;
+    flex-direction: column;
+
+    .pre-view {
+        position: relative;
+        max-width: 10%;
+        margin-bottom: 30px;
+        img {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-delete {
+            border-radius: 10px;
+            position: absolute;
+            cursor: pointer;
+            color: #fff;
+            font-size: 40px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: 300ms;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
     label {
         cursor: pointer;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.123);
@@ -7,18 +37,22 @@
         height: 200px;
         border: 4px  dashed #ccc;
         border-radius: 10px;
-        font-size: 30px;
+        font-size: 16px;
         padding: 0px;
         text-align: center;
         white-space: wrap;
         text-overflow: ellipsis;
-        overflow: hidden;
+        overflow: auto;
+        margin-bottom: 20px;
     }
     input {
         display: none;
     }
-}
 
-.load-box {
-    margin-top: 200px;
+    .load-box {
+        position: static;
+        width: fit-content;
+        height: fit-content;
+        font-size: 40px;
+    }
 }

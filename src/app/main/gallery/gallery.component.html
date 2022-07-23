@@ -1,19 +1,24 @@
 <div class="gallery container">
     <div class="img-box" *ngFor="let image of imagesArray; let i = index">
-        <img [src]="image.url" alt=""  (click)="openImage(i)">
+        <img class="img" [src]="image.url" alt=""  (click)="openImage(i)">
         <div class="hover-rect content-center" *ngIf="(userAuthService.currentUser$ | async) !== null" (click)="deleteImage(image.id, i, image.name)"><span *ngIf="(smallLoadingHandler.isLoading$ | async) !== true">Delete</span></div>
         <div class="loading-delete content-center" *ngIf="(smallLoadingHandler.isLoading$ | async) === true && i === chosenIndex">
             <i class="uil uil-spinner-alt"></i>
         </div>
     </div>
-    <div class="dummy"></div>
-    <div class="dummy"></div>
+    <div class="img-box dummy"></div>
+    <div class="img-box dummy"></div>
     <div class="opened-img" *ngIf="openedImage">
-        <span (click)="previousImage()">&larr;</span>
-        <img [src]="imageShowed.url" alt="" (click)="closeImage()">
-        <span (click)="nextImage()">&rarr;</span>
+        <span class="content-center" (click)="previousImage()">&larr;</span>
+        <div class="showedImg  content-center">
+            <img class="showed" [src]="imageShowed.url" alt="" (click)="closeImage()">
+        </div>
+        <span class="content-center" (click)="nextImage()">&rarr;</span>
     </div>
     <div class="load-box content-center" *ngIf="loadingHandler.isLoading$ | async">
         <i class="uil uil-spinner-alt"></i>
     </div>
+</div>
+<div class="content-center" *ngIf="isEmptyArray">
+    <h1>No images...</h1>
 </div>

@@ -7,14 +7,24 @@
         </div>
         <ul class="content-center">
           <div class="menu content-center">
-            <li *ngIf="(userAuthService.currentUser$ | async) === null"><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-            <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
-            <li><a routerLink="/contact" routerLinkActive="active">Contact Us</a></li>
+            <li *ngIf="(userAuthService.currentUser$ | async) === null">
+              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            </li>
+            <li>
+              <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
+            </li>
+            <li>
+              <a routerLink="/contact" routerLinkActive="active">Contact Us</a>
+            </li>
           </div>
           <ng-template #logIn>
             <div class="sign-section content-center">
-              <li><a class="btn" routerLink="/log-in" routerLinkActive="active-btn">Log In</a></li>
-              <li><a class="btn" routerLink="/sign-up" routerLinkActive="active-btn">Sign Up</a></li>
+              <li>
+                <a class="btn" routerLink="/log-in" routerLinkActive="active-btn">Log In</a>
+              </li>
+              <li>
+                <a class="btn" routerLink="/sign-up" routerLinkActive="active-btn">Sign Up</a>
+              </li>
             </div>
           </ng-template>
           <ng-container *ngIf="userAuthService.currentUser$ | async as user; else logIn">
@@ -24,6 +34,7 @@
               <li class="btn" (click)="logOut()"><i class="uil uil-signout"></i> Log out</li>
             </div>
           </ng-container>
+          <li class="bars"><i class="uil uil-bars"></i></li>
         </ul>
       </nav>
     </header>

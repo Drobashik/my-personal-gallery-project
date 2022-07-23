@@ -33,10 +33,12 @@ export class SignUpComponent implements OnInit {
       const {name, email, password} = this.signUpFormGroup.value;
       this.userAuthService.signUp(name, email, password).subscribe({
         next: () => {
-          this.loadingHandler.endLoading();
           this.router.navigate(['/user-page']);
         },
-        error: () => {
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
           this.loadingHandler.endLoading();
         }
       })

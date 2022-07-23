@@ -5,6 +5,7 @@ export class LoadingHandler {
 
     isLoading$: Observable<boolean> = this._isLoading$.pipe(
         switchMap(isLoading => {
+            console.log(isLoading);
             if(!isLoading) {
                 return of(false);
             }
